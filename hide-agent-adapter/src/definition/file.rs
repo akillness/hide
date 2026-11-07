@@ -64,6 +64,7 @@ pub enum Hooks {
     Pi,
     Omp,
     Agy,
+    Jeopi,
     /// No hook, no session reader: the state is read from the screen.
     None,
 }

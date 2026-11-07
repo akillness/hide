@@ -85,6 +85,7 @@ pub fn of(dialect: PluginDialect) -> &'static Plugin {
         PluginDialect::OpenCode => &crate::opencode::PLUGIN,
         PluginDialect::Pi => &crate::pi_extension::PI_PLUGIN,
         PluginDialect::Omp => &crate::pi_extension::OMP_PLUGIN,
+        PluginDialect::Jeopi => &crate::pi_extension::JEOPI_PLUGIN,
     }
 }
 

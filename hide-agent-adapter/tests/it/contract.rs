@@ -554,7 +554,16 @@ fn a_launch_choice_reaches_each_agent_only_as_its_declared_options_take_it() {
         model: model.map(str::to_owned),
         effort: effort.map(str::to_owned),
     };
-    let takes_model = ["claude-code", "codex", "grok", "pi", "omp", "antigravity"];
+    let takes_model = [
+        "claude-code",
+        "codex",
+        "grok",
+        "pi",
+        "omp",
+        "antigravity",
+        "jeopi",
+        "jeo",
+    ];
     for row in ADAPTERS.iter().filter(|row| row.start.is_some()) {
         let dialect = row.start.unwrap();
         assert_eq!(
@@ -646,6 +655,8 @@ fn every_started_agent_declares_how_it_starts_without_permission_questions() {
             "antigravity",
             FullAccess::Options(&[&["--dangerously-skip-permissions"]]),
         ),
+        ("jeopi", FullAccess::Options(&[&["--auto-approve"]])),
+        ("jeo", FullAccess::NotAsked),
     ];
     let started: Vec<_> = ADAPTERS
         .iter()

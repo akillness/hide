@@ -186,7 +186,7 @@ fn every_installed_plugin_runs_its_host_contract() {
                 crate::opencode_plugin::the_plugin_behaves_as_opencode_runs_it();
                 crate::opencode_plugin::the_plugin_behaves_as_opencode_2_runs_it();
             }
-            PluginDialect::Pi | PluginDialect::Omp => {
+            PluginDialect::Pi | PluginDialect::Omp | PluginDialect::Jeopi => {
                 let file = hide_agent_hooks::plugin::of(dialect).entry();
                 crate::pi_extension::behaves_as_the_host_runs_it(file, row.id);
             }

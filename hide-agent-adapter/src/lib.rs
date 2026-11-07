@@ -29,6 +29,8 @@ pub enum AgentId {
     Pi,
     Omp,
     Antigravity,
+    Jeopi,
+    Jeo,
     Cursor,
 }
 
@@ -48,7 +50,7 @@ impl AgentId {
     /// every taken one after; docs/delivery.md, Input an agent did not take).
     /// omp reports its session at start, so the wait costs no turn.
     pub const fn brief_after_session(self) -> bool {
-        matches!(self, Self::Omp)
+        matches!(self, Self::Omp | Self::Jeopi)
     }
 
     /// Whether the agent takes a multi-line paste as one paste, never
@@ -79,7 +81,7 @@ impl AgentId {
     /// other work to start one for (docs/delivery.md, Input an agent did
     /// not take).
     pub const fn turn_takes_brief(self) -> bool {
-        matches!(self, Self::Omp)
+        matches!(self, Self::Omp | Self::Jeopi)
     }
 
     pub const fn prompt_hook_records(self) -> bool {
@@ -102,10 +104,11 @@ pub enum HookDialect {
     Pi,
     Omp,
     Antigravity,
+    Jeopi,
 }
 
 impl HookDialect {
-    pub const ALL: [Self; 7] = [
+    pub const ALL: [Self; 8] = [
         Self::ClaudeCode,
         Self::Codex,
         Self::OpenCode,
@@ -113,6 +116,7 @@ impl HookDialect {
         Self::Pi,
         Self::Omp,
         Self::Antigravity,
+        Self::Jeopi,
     ];
 
     pub const fn adapter(self) -> &'static AgentAdapter {
@@ -125,6 +129,7 @@ impl HookDialect {
             Self::Pi => AgentId::Pi.adapter(),
             Self::Omp => AgentId::Omp.adapter(),
             Self::Antigravity => AgentId::Antigravity.adapter(),
+            Self::Jeopi => AgentId::Jeopi.adapter(),
         }
     }
 }
@@ -158,6 +163,7 @@ pub enum PluginDialect {
     /// Pi's and omp's extension: one source, two files.
     Pi,
     Omp,
+    Jeopi,
 }
 
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
@@ -350,6 +356,8 @@ pub enum LaunchDialect {
     Omp,
     Cursor,
     Antigravity,
+    Jeopi,
+    Jeo,
 }
 
 impl LaunchDialect {
@@ -363,6 +371,8 @@ impl LaunchDialect {
             Self::Omp => AgentId::Omp.adapter(),
             Self::Cursor => AgentId::Cursor.adapter(),
             Self::Antigravity => AgentId::Antigravity.adapter(),
+            Self::Jeopi => AgentId::Jeopi.adapter(),
+            Self::Jeo => AgentId::Jeo.adapter(),
         }
     }
 
@@ -466,6 +476,18 @@ impl LaunchDialect {
                 efforts: &[],
                 full_access: FullAccess::Options(&[&["--auto-approve"]]),
             },
+            Self::Jeopi => LaunchOptions {
+                model: &["--model", "{}"],
+                effort: &["--thinking", "{}"],
+                efforts: &["minimal", "low", "medium", "high", "xhigh"],
+                full_access: FullAccess::Options(&[&["--auto-approve"]]),
+            },
+            Self::Jeo => LaunchOptions {
+                model: &["--model", "{}"],
+                effort: &["--thinking", "{}"],
+                efforts: &["low", "medium", "high", "xhigh"],
+                full_access: FullAccess::NotAsked,
+            },
             Self::Cursor => LaunchOptions {
                 model: &["--model", "{}"],
                 effort: &[],
@@ -530,7 +552,7 @@ impl LaunchDialect {
     /// Verified launch dialects that accept repeated extra permission roots.
     /// A checkout cwd is independent of this optional CLI argument.
     pub const fn accepts_extra_directories(self) -> bool {
-        matches!(self, Self::Claude | Self::Codex | Self::Omp | Self::Cursor)
+        matches!(self, Self::Claude | Self::Codex | Self::Omp | Self::Jeopi | Self::Cursor)
     }
 
     pub const fn closes_pane_when_sleeping(self) -> bool {
@@ -551,7 +573,7 @@ impl LaunchDialect {
     pub const fn quit_key(self) -> Option<&'static str> {
         match self {
             Self::Claude | Self::Codex | Self::Antigravity => Some("ctrl+c"),
-            Self::Grok | Self::OpenCode | Self::Pi | Self::Omp | Self::Cursor => None,
+            Self::Grok | Self::OpenCode | Self::Pi | Self::Omp | Self::Jeopi | Self::Jeo | Self::Cursor => None,
         }
     }
 
@@ -569,7 +591,7 @@ impl LaunchDialect {
             Self::Claude => Some("Press Ctrl-C again to exit"),
             Self::Codex => Some("again to quit"),
             Self::Antigravity => Some("press ctrl+c again to exit"),
-            Self::Grok | Self::OpenCode | Self::Pi | Self::Omp | Self::Cursor => None,
+            Self::Grok | Self::OpenCode | Self::Pi | Self::Omp | Self::Jeopi | Self::Jeo | Self::Cursor => None,
         }
     }
 
@@ -621,6 +643,8 @@ impl LaunchDialect {
             Self::Pi => defs::PI.resume_session,
             Self::Omp => defs::OMP.resume_session,
             Self::Antigravity => defs::ANTIGRAVITY.resume_session,
+            Self::Jeopi => defs::JEOPI.resume_session,
+            Self::Jeo => defs::JEO.resume_session,
             Self::Cursor => return "--resume",
         };
         match session {

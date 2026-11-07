@@ -86,6 +86,8 @@ it("derives all seven supported phone starts and the existing default from the g
     { id: "grok", label: "Grok" }, { id: "opencode", label: "OpenCode" },
     { id: "pi", label: "Pi" }, { id: "omp", label: "omp" },
     { id: "agy", label: "Antigravity" },
+    { id: "jeopi", label: "jeopi" },
+    { id: "jeo", label: "jeo" },
   ]);
   expect(START_KINDS.map((row) => row.id)).toEqual(PROVIDER_KINDS);
   expect(START_KINDS).toEqual(AGENT_ADAPTERS.filter((row) => row.can_start).map((row) => ({ id: row.herdr_kind, label: row.picker_label })));

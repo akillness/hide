@@ -62,6 +62,22 @@ pub const OMP: PluginFile = PluginFile {
     ],
 };
 
+pub const JEOPI: PluginFile = PluginFile {
+    agent: "jeopi",
+    noun: "extension",
+    source_name: SOURCE_NAME,
+    version: VERSION,
+    config: AgentId::Jeopi,
+    folder: "extensions",
+    own_folder: None,
+    file_name: "hide.ts",
+    template: TEMPLATE,
+    constants: &[
+        ("__HIDE_AGENT__", "\"jeopi\""),
+        ("__HIDE_VERSION__", VERSION_TEXT),
+    ],
+};
+
 pub const PI_PLUGIN: Plugin = Plugin {
     files: &[PI],
     trust: Some(crate::folder_trust::Agent::Pi),
@@ -72,6 +88,11 @@ pub const OMP_PLUGIN: Plugin = Plugin {
     trust: None,
 };
 
+pub const JEOPI_PLUGIN: Plugin = Plugin {
+    files: &[JEOPI],
+    trust: None,
+};
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -79,7 +100,7 @@ mod tests {
     #[test]
     fn the_version_the_extension_tells_the_helper_is_its_markers() {
         assert_eq!(VERSION_TEXT.parse::<u32>(), Ok(VERSION));
-        for file in [&PI, &OMP] {
+        for file in [&PI, &OMP, &JEOPI] {
             let text = file.text(std::path::Path::new("/kit/hide-agent-hooks"));
             assert!(text.starts_with(&format!("// {}@{VERSION} ", file.source_name)));
             assert!(text.contains(&format!("const VERSION = {VERSION};")));

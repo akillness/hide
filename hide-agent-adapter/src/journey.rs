@@ -106,7 +106,7 @@ const fn requests_per_turn(start: super::LaunchDialect) -> u32 {
     use super::LaunchDialect::*;
     match start {
         Grok => 4,
-        Claude | Codex | OpenCode | Pi | Omp | Cursor | Antigravity => REQUESTS_PER_TURN,
+        Claude | Codex | OpenCode | Pi | Omp | Jeopi | Jeo | Cursor | Antigravity => REQUESTS_PER_TURN,
     }
 }
 

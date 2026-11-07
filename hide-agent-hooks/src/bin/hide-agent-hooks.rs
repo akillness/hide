@@ -146,7 +146,7 @@ fn main() -> ExitCode {
         // What Hide's script in an agent's own folder asks
         // (`hide_agent_hooks::plugin`): OpenCode's plugin, Pi's and omp's
         // extension.
-        Some(agent @ ("opencode" | "pi" | "omp")) => {
+        Some(agent @ ("opencode" | "pi" | "omp" | "jeopi")) => {
             let _ = std::panic::catch_unwind(|| {
                 plugin_helper::run(agent, arguments.get(1).map(String::as_str), started)
             });
@@ -180,7 +180,7 @@ fn main() -> ExitCode {
 fn agent_call(arguments: &[String]) -> bool {
     matches!(
         arguments.first().map(String::as_str),
-        Some("hook" | "opencode" | "pi" | "omp")
+        Some("hook" | "opencode" | "pi" | "omp" | "jeopi")
     )
 }
 
@@ -220,7 +220,7 @@ fn usage() -> String {
      [--source <install marker>]\n       \
      hide-agent-hooks hook --runtime antigravity \
      --event <SessionStart|UserPromptSubmit|PreToolUse|Stop> [--source <install marker>]\n       \
-     hide-agent-hooks <opencode|pi|omp> <start|prompt|confirm|tool|letters|subagents>\n       \
+     hide-agent-hooks <opencode|pi|omp|jeopi> <start|prompt|confirm|tool|letters|subagents>\n       \
      hide-agent-hooks doctor [--json]"
         .to_owned()
 }

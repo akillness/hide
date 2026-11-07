@@ -63,9 +63,9 @@ pub fn web_contract() -> impl Iterator<Item = WebAdapter> {
                 Some(HookKind::Hook)
             }
             super::HookInstall::Plugin(super::PluginDialect::OpenCode) => Some(HookKind::Plugin),
-            super::HookInstall::Plugin(super::PluginDialect::Pi | super::PluginDialect::Omp) => {
-                Some(HookKind::Extension)
-            }
+            super::HookInstall::Plugin(
+                super::PluginDialect::Pi | super::PluginDialect::Omp | super::PluginDialect::Jeopi,
+            ) => Some(HookKind::Extension),
             super::HookInstall::None => None,
         },
     })

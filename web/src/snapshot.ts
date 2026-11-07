@@ -2721,7 +2721,7 @@ export type ProjectSuggestions = {
 };
 
 /** An agent Desk talks to over ACP, by its kind name (PRD Desk 1차, D-79); `contracts/snapshot-wire-enums.json` `desk_agent`. */
-export type DeskAgentId = "claude" | "codex" | "grok" | "opencode" | "pi" | "omp" | "agy";
+export type DeskAgentId = "claude" | "codex" | "grok" | "opencode" | "pi" | "omp" | "agy" | "jeopi";
 /** `desk_agent_state`; `off` is a chosen agent Settings › Agents has since switched off. */
 export type DeskAgentState = "checking" | "ready" | "preparing" | "install_failed" | "node_missing" | "cli_missing" | "no_ask_mode" | "off";
 export type DeskHostState = "idle" | "starting" | "ready" | "thinking" | "stopped";

@@ -105,6 +105,7 @@ pub fn kit_hook_status(
         HookDialect::OpenCode
         | HookDialect::Pi
         | HookDialect::Omp
+        | HookDialect::Jeopi
         | HookDialect::Grok
         | HookDialect::Cursor
         | HookDialect::Antigravity => {

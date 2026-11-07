@@ -88,7 +88,17 @@ fn all_core_gates_accept_the_same_aliases_without_enabling_other_agents() {
     }
     assert_eq!(
         crate::model::AGENT_KINDS,
-        ["claude", "codex", "grok", "opencode", "pi", "omp", "agy"]
+        [
+            "claude",
+            "codex",
+            "grok",
+            "opencode",
+            "pi",
+            "omp",
+            "agy",
+            "jeopi",
+            "jeo",
+        ]
     );
     assert_eq!(
         crate::agent_find::agent_find("CLAUDE_CODE").unwrap().open,

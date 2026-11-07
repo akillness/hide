@@ -600,9 +600,10 @@ pub fn start(path: &Path, search: &OsStr) -> Start {
 }
 
 /// The folders installers put a CLI in that a daemon's `PATH` may not reach.
-fn usual_install_folders(home: &Path) -> [PathBuf; 9] {
+fn usual_install_folders(home: &Path) -> [PathBuf; 10] {
     [
         home.join(".local/bin"),
+        home.join(".bun/bin"),
         // agy's Windows installer: `%LOCALAPPDATA%\agy\bin`, whose default is
         // under the profile folder.
         home.join("AppData").join("Local").join("agy").join("bin"),

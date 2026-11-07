@@ -601,5 +601,246 @@
       ]
     ],
     "hook_kind": "hook"
+  },
+  {
+    "usage": {
+      "limits": {
+        "five_hour": {
+          "support": "unsupported",
+          "detail": {
+            "kind": {
+              "kind": "no_such_data"
+            },
+            "reason": "The agent has no independent subscription window.",
+            "would_change": "The agent exposes its own subscription limits."
+          }
+        },
+        "weekly": {
+          "support": "unsupported",
+          "detail": {
+            "kind": {
+              "kind": "no_such_data"
+            },
+            "reason": "The agent has no independent subscription window.",
+            "would_change": "The agent exposes its own subscription limits."
+          }
+        },
+        "scoped": {
+          "support": "unsupported",
+          "detail": {
+            "kind": {
+              "kind": "no_such_data"
+            },
+            "reason": "The agent has no independent subscription window.",
+            "would_change": "The agent exposes its own subscription limits."
+          }
+        },
+        "monthly": {
+          "support": "unsupported",
+          "detail": {
+            "kind": {
+              "kind": "no_such_data"
+            },
+            "reason": "The agent has no independent subscription window.",
+            "would_change": "The agent exposes its own subscription limits."
+          }
+        }
+      },
+      "tokens": {
+        "support": "unsupported",
+        "detail": {
+          "kind": {
+            "kind": "no_such_data"
+          },
+          "reason": "No supported local usage record is available.",
+          "would_change": "The agent provides a documented local usage record."
+        }
+      },
+      "cost": {
+        "support": "unsupported",
+        "detail": {
+          "kind": {
+            "kind": "no_such_data"
+          },
+          "reason": "No supported local usage record is available.",
+          "would_change": "The agent provides a documented local usage record."
+        }
+      },
+      "models": {
+        "support": "unsupported",
+        "detail": {
+          "kind": {
+            "kind": "no_such_data"
+          },
+          "reason": "No supported local usage record is available.",
+          "would_change": "The agent provides a documented local usage record."
+        }
+      },
+      "attribution": {
+        "session": {
+          "support": "unsupported",
+          "detail": {
+            "kind": {
+              "kind": "no_such_data"
+            },
+            "reason": "No supported local usage record is available.",
+            "would_change": "The agent provides a documented local usage record."
+          }
+        },
+        "project": {
+          "support": "unsupported",
+          "detail": {
+            "kind": {
+              "kind": "no_such_data"
+            },
+            "reason": "No supported local usage record is available.",
+            "would_change": "The agent provides a documented local usage record."
+          }
+        }
+      }
+    },
+    "id": "jeopi",
+    "aliases": [],
+    "label": "jeopi",
+    "picker_label": "jeopi",
+    "herdr_kind": "jeopi",
+    "doc_url": "https://github.com/akillness/jeopi#readme",
+    "install_url": "https://github.com/akillness/jeopi",
+    "logo_id": "jeopi",
+    "can_start": true,
+    "can_resume": true,
+    "efforts": [
+      "minimal",
+      "low",
+      "medium",
+      "high",
+      "xhigh"
+    ],
+    "can_pick_model": true,
+    "program": "jeopi",
+    "full_access": [
+      [
+        "--auto-approve"
+      ]
+    ],
+    "hook_kind": "extension"
+  },
+  {
+    "usage": {
+      "limits": {
+        "five_hour": {
+          "support": "unsupported",
+          "detail": {
+            "kind": {
+              "kind": "no_such_data"
+            },
+            "reason": "The agent has no independent subscription window.",
+            "would_change": "The agent exposes its own subscription limits."
+          }
+        },
+        "weekly": {
+          "support": "unsupported",
+          "detail": {
+            "kind": {
+              "kind": "no_such_data"
+            },
+            "reason": "The agent has no independent subscription window.",
+            "would_change": "The agent exposes its own subscription limits."
+          }
+        },
+        "scoped": {
+          "support": "unsupported",
+          "detail": {
+            "kind": {
+              "kind": "no_such_data"
+            },
+            "reason": "The agent has no independent subscription window.",
+            "would_change": "The agent exposes its own subscription limits."
+          }
+        },
+        "monthly": {
+          "support": "unsupported",
+          "detail": {
+            "kind": {
+              "kind": "no_such_data"
+            },
+            "reason": "The agent has no independent subscription window.",
+            "would_change": "The agent exposes its own subscription limits."
+          }
+        }
+      },
+      "tokens": {
+        "support": "unsupported",
+        "detail": {
+          "kind": {
+            "kind": "no_such_data"
+          },
+          "reason": "No supported local usage record is available.",
+          "would_change": "The agent provides a documented local usage record."
+        }
+      },
+      "cost": {
+        "support": "unsupported",
+        "detail": {
+          "kind": {
+            "kind": "no_such_data"
+          },
+          "reason": "No supported local usage record is available.",
+          "would_change": "The agent provides a documented local usage record."
+        }
+      },
+      "models": {
+        "support": "unsupported",
+        "detail": {
+          "kind": {
+            "kind": "no_such_data"
+          },
+          "reason": "No supported local usage record is available.",
+          "would_change": "The agent provides a documented local usage record."
+        }
+      },
+      "attribution": {
+        "session": {
+          "support": "unsupported",
+          "detail": {
+            "kind": {
+              "kind": "no_such_data"
+            },
+            "reason": "No supported local usage record is available.",
+            "would_change": "The agent provides a documented local usage record."
+          }
+        },
+        "project": {
+          "support": "unsupported",
+          "detail": {
+            "kind": {
+              "kind": "no_such_data"
+            },
+            "reason": "No supported local usage record is available.",
+            "would_change": "The agent provides a documented local usage record."
+          }
+        }
+      }
+    },
+    "id": "jeo",
+    "aliases": [],
+    "label": "jeo",
+    "picker_label": "jeo",
+    "herdr_kind": "jeo",
+    "doc_url": "https://github.com/akillness/jeo-code#readme",
+    "install_url": "https://github.com/akillness/jeo-code",
+    "logo_id": "jeo",
+    "can_start": true,
+    "can_resume": true,
+    "efforts": [
+      "low",
+      "medium",
+      "high",
+      "xhigh"
+    ],
+    "can_pick_model": true,
+    "program": "jeo",
+    "full_access": [],
+    "hook_kind": null
   }
 ]

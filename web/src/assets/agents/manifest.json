@@ -53,6 +53,22 @@
       "license": "Google's brand terms ask for a request before a Google logo is used and forbid altering one (https://partnermarketinghub.withgoogle.com/brands/google/trademarks-and-terms/); the press page offers the mark for download and states no usage terms of its own",
       "modification": "as published: the press kit Icon - Full Color SVG (https://antigravity.google/assets/image/brand/antigravity-icon__full-color.svg, also svg/antigravity-icon__full-color.svg in the press kit zip) byte for byte, saved as antigravity.svg",
       "retrieved": "2026-10-18"
+    },
+    {
+      "id": "jeopi",
+      "file": "jeopi.svg",
+      "source_url": "https://github.com/akillness/jeopi",
+      "license": "MIT",
+      "modification": "as designed",
+      "retrieved": "2026-11-07"
+    },
+    {
+      "id": "jeo",
+      "file": "jeo.svg",
+      "source_url": "https://github.com/akillness/jeo-code",
+      "license": "MIT",
+      "modification": "as designed",
+      "retrieved": "2026-11-07"
     }
   ],
   "existing": [

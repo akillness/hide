@@ -85,7 +85,7 @@ pub fn read_call(payload: &[u8], truncated: bool, dialect: HookDialect) -> Optio
     let (tool, input, cwd) = match dialect {
         // OpenCode's plugin and Pi's and omp's extension hand their helper the
         // command itself; no hook payload of theirs reaches this reader.
-        HookDialect::OpenCode | HookDialect::Pi | HookDialect::Omp => return None,
+        HookDialect::OpenCode | HookDialect::Pi | HookDialect::Omp | HookDialect::Jeopi => return None,
         HookDialect::Antigravity => {
             let call = serde_json::from_slice::<AntigravityPayload>(payload)
                 .ok()?
@@ -114,7 +114,7 @@ pub fn read_call(payload: &[u8], truncated: bool, dialect: HookDialect) -> Optio
     };
     let shell = match dialect {
         HookDialect::ClaudeCode => &["Bash", "PowerShell"][..],
-        HookDialect::Codex | HookDialect::OpenCode | HookDialect::Pi | HookDialect::Omp => {
+        HookDialect::Codex | HookDialect::OpenCode | HookDialect::Pi | HookDialect::Omp | HookDialect::Jeopi => {
             &["Bash"][..]
         }
         HookDialect::Grok => &["run_terminal_command", "Bash"][..],

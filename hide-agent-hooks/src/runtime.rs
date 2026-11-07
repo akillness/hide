@@ -335,6 +335,7 @@ impl AgentRuntime {
             | hide_agent_adapter::HookDialect::Cursor
             | hide_agent_adapter::HookDialect::Pi
             | hide_agent_adapter::HookDialect::Omp
+            | hide_agent_adapter::HookDialect::Jeopi
             | hide_agent_adapter::HookDialect::Antigravity => None,
         }
     }

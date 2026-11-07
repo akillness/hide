@@ -445,5 +445,126 @@
       "curl -fsSL https://antigravity.google/cli/install.sh | bash",
       "irm https://antigravity.google/cli/install.ps1 | iex"
     ]
+  },
+  {
+    "id": "jeopi",
+    "herdr_kind": "jeopi",
+    "home_folder": [
+      ".jeopi",
+      "agent"
+    ],
+    "prompt_form": [
+      "--",
+      "{}"
+    ],
+    "model_flag": [
+      "--model",
+      "{}"
+    ],
+    "full_access_flag": [
+      "--auto-approve"
+    ],
+    "untitled": "jeopi",
+    "cells": {
+      "start": true,
+      "start_untrusted": true,
+      "launch_brief": true,
+      "reply": false,
+      "integration": true,
+      "guidance_memory": false,
+      "letter": true,
+      "letter_busy": false,
+      "letter_menu": false,
+      "composer": true,
+      "sleep_wake": false,
+      "resume": false,
+      "fork": false,
+      "title": false,
+      "usage": false
+    },
+    "letter": "next_prompt",
+    "busy_letter": [],
+    "stop_observer": null,
+    "input": [
+      "launch_prompt",
+      "typed"
+    ],
+    "wake": null,
+    "title": null,
+    "request_budget": 12,
+    "fake_home": {
+      "status": "proven",
+      "key_env": "JOURNEY_FAKE_KEY",
+      "auto_update": {
+        "kind": "config",
+        "path": ".jeopi/agent/config.yml",
+        "key": "startup",
+        "value": "{\"checkUpdate\":false}"
+      },
+      "evidence": "https://github.com/akillness/jeopi"
+    },
+    "minimum_version": "16.6.18",
+    "update_commands": [
+      "bun install -g jeopi-cli",
+      "npm install -g jeopi-cli"
+    ]
+  },
+  {
+    "id": "jeo",
+    "herdr_kind": "jeo",
+    "home_folder": [
+      ".jeo"
+    ],
+    "prompt_form": [
+      "--",
+      "{}"
+    ],
+    "model_flag": [
+      "--model",
+      "{}"
+    ],
+    "full_access_flag": [],
+    "untitled": "jeo",
+    "cells": {
+      "start": true,
+      "start_untrusted": true,
+      "launch_brief": true,
+      "reply": false,
+      "integration": true,
+      "guidance_memory": false,
+      "letter": false,
+      "letter_busy": false,
+      "letter_menu": false,
+      "composer": true,
+      "sleep_wake": false,
+      "resume": false,
+      "fork": false,
+      "title": false,
+      "usage": false
+    },
+    "letter": null,
+    "busy_letter": [],
+    "stop_observer": null,
+    "input": [
+      "launch_prompt",
+      "typed"
+    ],
+    "wake": null,
+    "title": null,
+    "request_budget": 9,
+    "fake_home": {
+      "status": "exception",
+      "auto_update": {
+        "kind": "environment",
+        "name": "JEO_SKIP_UPDATE_CHECK",
+        "value": "1"
+      },
+      "reason": "The API-key environment has not been proven."
+    },
+    "minimum_version": "0.12.0",
+    "update_commands": [
+      "bun install -g jeo-code",
+      "npm install -g jeo-code"
+    ]
   }
 ]

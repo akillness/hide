@@ -164,7 +164,12 @@ const fn project(declaration: &'static hide_agent_adapter::AgentAdapter) -> Agen
             // Hide's, and Grok's and Cursor's by the guidance file, never by a
             // settings file; the table is a constant, so a declaration saying
             // otherwise fails the build.
-            HookInstall::Runtime(HookDialect::OpenCode | HookDialect::Pi | HookDialect::Omp) => {
+            HookInstall::Runtime(
+                HookDialect::OpenCode
+                | HookDialect::Pi
+                | HookDialect::Omp
+                | HookDialect::Jeopi,
+            ) => {
                 panic!("this agent's hook is a script file of Hide's, not a settings file")
             }
             HookInstall::Runtime(

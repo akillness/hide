@@ -102,6 +102,7 @@ impl Agent {
             PluginDialect::OpenCode => HookDialect::OpenCode,
             PluginDialect::Pi => HookDialect::Pi,
             PluginDialect::Omp => HookDialect::Omp,
+            PluginDialect::Jeopi => HookDialect::Jeopi,
         }
     }
 
@@ -110,7 +111,7 @@ impl Agent {
     fn current(&self, version: Option<u32>) -> bool {
         match self.dialect {
             PluginDialect::OpenCode => true,
-            PluginDialect::Pi | PluginDialect::Omp => {
+            PluginDialect::Pi | PluginDialect::Omp | PluginDialect::Jeopi => {
                 version == Some(hide_agent_hooks::pi_extension::VERSION)
             }
         }
@@ -122,7 +123,7 @@ impl Agent {
     fn memory_session(&self, input: &Input, session: &str) -> Option<String> {
         match self.dialect {
             PluginDialect::OpenCode => Some(session.to_owned()),
-            PluginDialect::Pi | PluginDialect::Omp => input
+            PluginDialect::Pi | PluginDialect::Omp | PluginDialect::Jeopi => input
                 .native_session
                 .clone()
                 .filter(|id| delivery::valid_session(id)),

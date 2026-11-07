@@ -32,7 +32,9 @@ impl ForkableAgent {
             hide_agent_adapter::LaunchDialect::Omp => Some(Self::Omp),
             hide_agent_adapter::LaunchDialect::OpenCode => Some(Self::OpenCode),
             hide_agent_adapter::LaunchDialect::Antigravity => Some(Self::Antigravity),
-            hide_agent_adapter::LaunchDialect::Cursor => None,
+            hide_agent_adapter::LaunchDialect::Jeopi
+            | hide_agent_adapter::LaunchDialect::Jeo
+            | hide_agent_adapter::LaunchDialect::Cursor => None,
         }
     }
 

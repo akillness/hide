@@ -35,7 +35,7 @@ describe("the agents of a machine (B8, B9, D-06)", () => {
   it("lists the seven supported agents in their order and nothing a machine still reports from before", () => {
     const reported = ["cursor", "kiro", "gemini-cli", "omp", "claude-code", "amp", "pi", "codex"].map((id) => agent(id));
     expect(supportedAgents(reported).map((row) => row.id)).toEqual(["claude-code", "codex", "pi", "omp"]);
-    expect(SUPPORTED_AGENTS).toEqual(["claude-code", "codex", "grok", "opencode", "pi", "omp", "antigravity"]);
+    expect(SUPPORTED_AGENTS).toEqual(["claude-code", "codex", "grok", "opencode", "pi", "omp", "antigravity", "jeopi", "jeo"]);
   });
 
   it("calls an agent installed only when its program was found; an agent the operator switched on keeps its switch after its program goes (B9)", () => {

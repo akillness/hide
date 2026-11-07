@@ -243,5 +243,64 @@
       "session": "usage_record",
       "project": "usage_record"
     }
+  },
+  {
+    "id": "jeopi",
+    "context": {
+      "guidance": "unsupported",
+      "memory": "unsupported",
+      "titles": "unsupported"
+    },
+    "hook": {
+      "sample": "hide-agent-hooks/tests/fixtures/hook-bytes/omp-extension.ts"
+    },
+    "session": {
+      "absent": "Jeopi uses its own session storage under ~/.jeopi/agent"
+    },
+    "features": [
+      "skill",
+      "letters",
+      "start"
+    ],
+    "usage": {
+      "five_hour": "no_such_data",
+      "weekly": "no_such_data",
+      "scoped": "no_such_data",
+      "monthly": "no_such_data",
+      "tokens": "no_such_data",
+      "cost": "no_such_data",
+      "models": "no_such_data",
+      "session": "no_such_data",
+      "project": "no_such_data"
+    }
+  },
+  {
+    "id": "jeo",
+    "context": {
+      "guidance": "unsupported",
+      "memory": "unsupported",
+      "titles": "unsupported"
+    },
+    "hook": {
+      "absent": "Jeo manages its own Socratic spec-first session loop and hooks under ~/.jeo"
+    },
+    "session": {
+      "absent": "Jeo manages its own Socratic spec-first session loop and hooks under ~/.jeo"
+    },
+    "features": [
+      "skill",
+      "start"
+    ],
+    "usage": {
+      "five_hour": "no_such_data",
+      "weekly": "no_such_data",
+      "scoped": "no_such_data",
+      "monthly": "no_such_data",
+      "tokens": "no_such_data",
+      "cost": "no_such_data",
+      "models": "no_such_data",
+      "session": "no_such_data",
+      "project": "no_such_data"
+    }
   }
 ]

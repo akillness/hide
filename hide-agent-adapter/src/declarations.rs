@@ -28,6 +28,18 @@ const RETIRED_CONTEXT_ABSENCE: CapabilityAbsence = CapabilityAbsence {
     would_change: "Restore active support with hooks Hide installs and measured context and title contracts.",
 };
 
+const JEOPI_CONTEXT_ABSENCE: CapabilityAbsence = CapabilityAbsence {
+    reason: "Jeopi uses its own session storage under ~/.jeopi/agent; Hide's extension handles live pane hooks and letters.",
+    evidence: "docs/agent-hooks.md#which-agents-hide-supports",
+    would_change: "Add a dedicated Jeopi session reader and journey fixtures.",
+};
+
+const JEO_CONTEXT_ABSENCE: CapabilityAbsence = CapabilityAbsence {
+    reason: "Jeo manages its own Socratic spec-first session loop and hooks under ~/.jeo.",
+    evidence: "docs/agent-hooks.md#which-agents-hide-supports",
+    would_change: "Add a dedicated Jeo hook and session reader.",
+};
+
 use usage::{
     AbsenceKind, Attribution, AttributionFrom, CostBasis, LimitDeclaration, LimitSource, ModelFrom,
     Support, TokenSource, UsageDeclaration, absent, not_built,
@@ -228,6 +240,36 @@ const ANTIGRAVITY_UPDATES: &[UpdateRoute] = &[
         systems: Systems::Windows,
         command: "irm https://antigravity.google/cli/install.ps1 | iex",
         source: ANTIGRAVITY_INSTALL,
+    },
+];
+
+const JEOPI_UPDATES: &[UpdateRoute] = &[
+    UpdateRoute {
+        method: InstallMethod::Bun("jeopi-cli"),
+        systems: Systems::Every,
+        command: "bun install -g jeopi-cli",
+        source: "https://github.com/akillness/jeopi#installation",
+    },
+    UpdateRoute {
+        method: InstallMethod::Npm("jeopi-cli"),
+        systems: Systems::Every,
+        command: "npm install -g jeopi-cli",
+        source: "https://github.com/akillness/jeopi#installation",
+    },
+];
+
+const JEO_UPDATES: &[UpdateRoute] = &[
+    UpdateRoute {
+        method: InstallMethod::Bun("jeo-code"),
+        systems: Systems::Every,
+        command: "bun install -g jeo-code",
+        source: "https://github.com/akillness/jeo-code#readme",
+    },
+    UpdateRoute {
+        method: InstallMethod::Npm("jeo-code"),
+        systems: Systems::Every,
+        command: "npm install -g jeo-code",
+        source: "https://github.com/akillness/jeo-code#readme",
     },
 ];
 
@@ -1010,6 +1052,247 @@ pub const ADAPTERS: &[AgentAdapter] = &[
         install_url: "https://antigravity.google/docs/install?tab=cli",
         updates: ANTIGRAVITY_UPDATES,
         logo_id: "antigravity",
+    },
+    AgentAdapter {
+        key: AgentId::Jeopi,
+        fake_home: journey::FakeHome::Proven {
+            key_env: "JOURNEY_FAKE_KEY",
+            auto_update: journey::AutoUpdate::Config {
+                path: ".jeopi/agent/config.yml",
+                key: "startup",
+                value: "{\"checkUpdate\":false}",
+            },
+            evidence: "https://github.com/akillness/jeopi",
+        },
+        id: defs::JEOPI.id,
+        label: defs::JEOPI.name,
+        picker_label: "jeopi",
+        sidebar_label: Some("jeopi"),
+        terminal_click: false,
+        aliases: defs::JEOPI.aliases,
+        executables: defs::JEOPI.executables,
+        folder: folder(&defs::JEOPI),
+        minimum: Some(MinimumVersion {
+            version: "16.6.18",
+            evidence: "docs/agent-hooks.md#the-oldest-version-of-each-agent",
+        }),
+        skill_location: SkillLocation::Shared,
+        hook: HookInstall::Plugin(PluginDialect::Jeopi),
+        guidance: Support::Unsupported(JEOPI_CONTEXT_ABSENCE),
+        engine_kind: "jeopi",
+        home_variable: None,
+        ai: Support::Supported(AiProvider {
+            id: "jeopi",
+            requests: Support::Supported(()),
+        }),
+        default_on: false,
+        prompt_hook: Some(PromptHook {
+            dialect: HookDialect::Jeopi,
+            context: true,
+        }),
+        guard: Some(HookDialect::Jeopi),
+        subagent_counts: Some(HookDialect::Jeopi),
+        memory: Support::Unsupported(JEOPI_CONTEXT_ABSENCE),
+        bell: false,
+        bell_names_inbox: false,
+        turn_end_letters: None,
+        tool_letters: Some(HookDialect::Jeopi),
+        session: None,
+        sleep: None,
+        fork: None,
+        resume: Some(LaunchDialect::Jeopi),
+        conversation: None,
+        titles: Support::Unsupported(JEOPI_CONTEXT_ABSENCE),
+        thread: Support::Unsupported(JEOPI_CONTEXT_ABSENCE),
+        composer: Support::Supported(Composer {
+            region: Region::Line,
+            marker: &["╰─"],
+            trailer: 0,
+            empty: &[Placeholder {
+                text: "⇧⇥ to change thinking effort",
+                style: Style::Any,
+            }],
+            pasted: None,
+        }),
+        input: &[
+            InputRung::AgentApi(AgentApi::LaunchPrompt),
+            InputRung::Typed,
+        ],
+        start: Some(LaunchDialect::Jeopi),
+        find: None,
+        usage: UsageDeclaration {
+            limits: LimitDeclaration {
+                five_hour: absent(
+                    AbsenceKind::NoSuchData,
+                    "The agent has no independent subscription window.",
+                    "The agent exposes its own subscription limits.",
+                ),
+                weekly: absent(
+                    AbsenceKind::NoSuchData,
+                    "The agent has no independent subscription window.",
+                    "The agent exposes its own subscription limits.",
+                ),
+                scoped: absent(
+                    AbsenceKind::NoSuchData,
+                    "The agent has no independent subscription window.",
+                    "The agent exposes its own subscription limits.",
+                ),
+                monthly: absent(
+                    AbsenceKind::NoSuchData,
+                    "The agent has no independent subscription window.",
+                    "The agent exposes its own subscription limits.",
+                ),
+            },
+            tokens: absent(
+                AbsenceKind::NoSuchData,
+                "No supported local usage record is available.",
+                "The agent provides a documented local usage record.",
+            ),
+            cost: absent(
+                AbsenceKind::NoSuchData,
+                "No supported local usage record is available.",
+                "The agent provides a documented local usage record.",
+            ),
+            models: absent(
+                AbsenceKind::NoSuchData,
+                "No supported local usage record is available.",
+                "The agent provides a documented local usage record.",
+            ),
+            attribution: Attribution {
+                session: absent(
+                    AbsenceKind::NoSuchData,
+                    "No supported local usage record is available.",
+                    "The agent provides a documented local usage record.",
+                ),
+                project: absent(
+                    AbsenceKind::NoSuchData,
+                    "No supported local usage record is available.",
+                    "The agent provides a documented local usage record.",
+                ),
+            },
+        },
+        doc_url: "https://github.com/akillness/jeopi#readme",
+        install_url: "https://github.com/akillness/jeopi",
+        updates: JEOPI_UPDATES,
+        logo_id: "jeopi",
+    },
+    AgentAdapter {
+        key: AgentId::Jeo,
+        fake_home: journey::FakeHome::Exception {
+            auto_update: Some(journey::AutoUpdate::Environment {
+                name: "JEO_SKIP_UPDATE_CHECK",
+                value: "1",
+            }),
+            reason: "The API-key environment has not been proven.",
+        },
+        id: defs::JEO.id,
+        label: defs::JEO.name,
+        picker_label: "jeo",
+        sidebar_label: Some("jeo"),
+        terminal_click: false,
+        aliases: defs::JEO.aliases,
+        executables: defs::JEO.executables,
+        folder: folder(&defs::JEO),
+        minimum: Some(MinimumVersion {
+            version: "0.12.0",
+            evidence: "docs/agent-hooks.md#the-oldest-version-of-each-agent",
+        }),
+        skill_location: SkillLocation::Shared,
+        hook: HookInstall::None,
+        guidance: Support::Unsupported(JEO_CONTEXT_ABSENCE),
+        engine_kind: "jeo",
+        home_variable: None,
+        ai: Support::Supported(AiProvider {
+            id: "jeo",
+            requests: Support::Supported(()),
+        }),
+        default_on: false,
+        prompt_hook: None,
+        guard: None,
+        composer: Support::Supported(Composer {
+            region: Region::Line,
+            marker: &["╰─"],
+            trailer: 0,
+            empty: &[Placeholder {
+                text: "⇧⇥ to change thinking effort",
+                style: Style::Any,
+            }],
+            pasted: None,
+        }),
+        subagent_counts: None,
+        memory: Support::Unsupported(JEO_CONTEXT_ABSENCE),
+        bell: false,
+        bell_names_inbox: false,
+        turn_end_letters: None,
+        tool_letters: None,
+        session: None,
+        sleep: None,
+        fork: None,
+        resume: Some(LaunchDialect::Jeo),
+        conversation: None,
+        titles: Support::Unsupported(JEO_CONTEXT_ABSENCE),
+        thread: Support::Unsupported(JEO_CONTEXT_ABSENCE),
+        input: &[
+            InputRung::AgentApi(AgentApi::LaunchPrompt),
+            InputRung::Typed,
+        ],
+        start: Some(LaunchDialect::Jeo),
+        find: None,
+        usage: UsageDeclaration {
+            limits: LimitDeclaration {
+                five_hour: absent(
+                    AbsenceKind::NoSuchData,
+                    "The agent has no independent subscription window.",
+                    "The agent exposes its own subscription limits.",
+                ),
+                weekly: absent(
+                    AbsenceKind::NoSuchData,
+                    "The agent has no independent subscription window.",
+                    "The agent exposes its own subscription limits.",
+                ),
+                scoped: absent(
+                    AbsenceKind::NoSuchData,
+                    "The agent has no independent subscription window.",
+                    "The agent exposes its own subscription limits.",
+                ),
+                monthly: absent(
+                    AbsenceKind::NoSuchData,
+                    "The agent has no independent subscription window.",
+                    "The agent exposes its own subscription limits.",
+                ),
+            },
+            tokens: absent(
+                AbsenceKind::NoSuchData,
+                "No supported local usage record is available.",
+                "The agent provides a documented local usage record.",
+            ),
+            cost: absent(
+                AbsenceKind::NoSuchData,
+                "No supported local usage record is available.",
+                "The agent provides a documented local usage record.",
+            ),
+            models: absent(
+                AbsenceKind::NoSuchData,
+                "No supported local usage record is available.",
+                "The agent provides a documented local usage record.",
+            ),
+            attribution: Attribution {
+                session: absent(
+                    AbsenceKind::NoSuchData,
+                    "No supported local usage record is available.",
+                    "The agent provides a documented local usage record.",
+                ),
+                project: absent(
+                    AbsenceKind::NoSuchData,
+                    "No supported local usage record is available.",
+                    "The agent provides a documented local usage record.",
+                ),
+            },
+        },
+        doc_url: "https://github.com/akillness/jeo-code#readme",
+        install_url: "https://github.com/akillness/jeo-code",
+        updates: JEO_UPDATES,
+        logo_id: "jeo",
     },
 ];
 

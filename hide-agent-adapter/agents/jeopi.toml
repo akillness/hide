@@ -1,0 +1,27 @@
+schema = 1
+id = "jeopi"
+name = "jeopi"
+executables = ["jeopi"]
+packages = ["jeopi-cli"]
+home = "~/.jeopi/agent"
+hooks = "jeopi"
+
+[resume]
+session = ["--resume", "{session}"]
+
+[screen]
+version = "2026.11.07.1"
+min_engine_version = 1
+updated_at = "2026-11-07T00:00:00Z"
+
+[[screen.rules]]
+id = "jeopi_working_spinner"
+state = "working"
+priority = 100
+region = "whole_recent"
+visible_working = true
+any = [
+  { contains = ["Working..."] },
+  { line_regex = ['^[⠋⠙⠹⠸⠼⠴⠦⠧⠇⠏] Working$'] },
+  { line_regex = ['^── [⠋⠙⠹⠸⠼⠴⠦⠧⠇⠏] Working ─+$'] }
+]

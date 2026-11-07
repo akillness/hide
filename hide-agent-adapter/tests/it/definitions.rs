@@ -113,6 +113,8 @@ fn the_built_in_definitions_are_herdrs_twenty_two_and_omp() {
             "gemini",
             "grok",
             "hermes",
+            "jeo",
+            "jeopi",
             "kilo",
             "kimi",
             "kiro",
@@ -148,6 +150,8 @@ fn each_agent_with_hides_features_takes_its_identity_from_its_definition() {
         (AgentId::Pi, Hooks::Pi),
         (AgentId::Omp, Hooks::Omp),
         (AgentId::Antigravity, Hooks::Agy),
+        (AgentId::Jeopi, Hooks::Jeopi),
+        (AgentId::Jeo, Hooks::None),
         (AgentId::Cursor, Hooks::None),
     ];
     assert_eq!(

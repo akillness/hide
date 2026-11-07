@@ -43,6 +43,8 @@ impl ProviderId {
     pub const PI: Self = Self("pi");
     pub const OMP: Self = Self("omp");
     pub const ANTIGRAVITY: Self = Self("antigravity");
+    pub const JEOPI: Self = Self("jeopi");
+    pub const JEO: Self = Self("jeo");
 
     pub fn as_str(self) -> &'static str {
         self.0
@@ -169,6 +171,8 @@ enum Backend {
     Pi,
     Omp,
     Antigravity,
+    Jeopi,
+    Jeo,
 }
 
 /// What only Hide AI decides for one declared provider: the model it is
@@ -218,6 +222,16 @@ const BINDINGS: &[Binding] = &[
         default_model: CLI_DEFAULT_MODEL,
         backend: Some(Backend::Antigravity),
     },
+    Binding {
+        provider: ProviderId::JEOPI,
+        default_model: CLI_DEFAULT_MODEL,
+        backend: Some(Backend::Jeopi),
+    },
+    Binding {
+        provider: ProviderId::JEO,
+        default_model: CLI_DEFAULT_MODEL,
+        backend: Some(Backend::Jeo),
+    },
 ];
 
 impl ProviderId {
@@ -259,6 +273,10 @@ pub fn build_backend(
         Backend::Antigravity => Arc::new(crate::AntigravityCliBackend::new(
             crate::TextCliConfig::new(model),
         )),
+        Backend::Jeopi => Arc::new(crate::JeopiCliBackend::new(crate::TextCliConfig::new(
+            model,
+        ))),
+        Backend::Jeo => Arc::new(crate::JeoCliBackend::new(crate::TextCliConfig::new(model))),
     }
 }
 
@@ -286,7 +304,9 @@ mod tests {
                 "OpenCode",
                 "Pi",
                 "omp",
-                "Antigravity"
+                "Antigravity",
+                "jeopi",
+                "jeo"
             ]
         );
     }

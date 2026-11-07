@@ -10,6 +10,8 @@ mod claude;
 mod codex;
 mod codex_home;
 mod grok;
+mod jeo;
+mod jeopi;
 mod log;
 mod omp;
 mod pi;
@@ -32,6 +34,8 @@ pub use antigravity::{
 pub use claude::{ClaudeCliBackend, ClaudeConfig, USAGE_ENVIRONMENT, UsageError};
 pub use codex::{CodexAppServerBackend, CodexConfig};
 pub use grok::GrokCliBackend;
+pub use jeo::JeoCliBackend;
+pub use jeopi::JeopiCliBackend;
 pub use log::{AiLogEvent, AiLogSink, NoopLogSink};
 pub use omp::{OmpConfig, OmpSdkBackend};
 pub use pi::PiCliBackend;

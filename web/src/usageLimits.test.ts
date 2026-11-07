@@ -11,7 +11,7 @@ it("offers only declared account windows and leaves the four unsupported agents 
   expect(accountWindows(agentAdapter("codex")!, read({ state: "not_offered" }))).toEqual(["weekly"]);
   expect(accountWindows(agentAdapter("codex")!, read({ state: "not_started" }))).toEqual(["five_hour", "weekly"]);
   const unsupported = AGENT_ADAPTERS.filter((adapter) => !hasLimits(adapter));
-  expect(unsupported.map((adapter) => adapter.id)).toEqual(["grok", "opencode", "pi", "omp"]);
+  expect(unsupported.map((adapter) => adapter.id)).toEqual(["grok", "opencode", "pi", "omp", "jeopi", "jeo"]);
   for (const adapter of unsupported) {
     expect(accountWindows(adapter, undefined)).toEqual([]);
     expect(absenceReason(adapter, t)).not.toBe("");

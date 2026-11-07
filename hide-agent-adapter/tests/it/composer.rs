@@ -55,6 +55,16 @@ fn every_supported_agent_reads_typed_pasted_and_erased_composers() {
             "agy",
             [Empty, Holds, Empty, Holds, Empty, Empty],
         ),
+        (
+            AgentId::Jeopi,
+            "omp",
+            [Empty, Holds, Empty, Holds, Empty, Empty],
+        ),
+        (
+            AgentId::Jeo,
+            "omp",
+            [Empty, Holds, Empty, Holds, Empty, Empty],
+        ),
     ];
     assert_eq!(
         cases.len(),
@@ -314,13 +324,15 @@ fn a_composer_holds_typed_text_only_when_it_shows_that_text_and_nothing_else() {
         (AgentId::Pi, "pi"),
         (AgentId::Omp, "omp"),
         (AgentId::Antigravity, "agy"),
+        (AgentId::Jeopi, "omp"),
+        (AgentId::Jeo, "omp"),
     ] {
         let composer = agent.adapter().composer.supported().expect(name);
         let typed = screen(&format!("{name}-1-typed"));
         assert!(composer.holds(&typed, "hello 안녕하세요"), "{name}");
         // omp's composer is one marked line, which shows only a text's
         // first line; the others show the text however it wraps.
-        if agent != AgentId::Omp {
+        if agent != AgentId::Omp && agent != AgentId::Jeopi && agent != AgentId::Jeo {
             assert!(
                 composer.holds(&typed, "hello\n안녕하세요\n"),
                 "{name}: wrapped the same"
@@ -419,6 +431,8 @@ fn every_measured_agent_takes_one_paste_except_grok_on_windows() {
         AgentId::Pi,
         AgentId::Omp,
         AgentId::Antigravity,
+        AgentId::Jeopi,
+        AgentId::Jeo,
     ] {
         assert!(
             agent.takes_one_paste(false) && agent.takes_one_paste(true),

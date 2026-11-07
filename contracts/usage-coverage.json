@@ -545,5 +545,195 @@
         }
       }
     }
+  },
+  {
+    "agent": "jeopi",
+    "cells": {
+      "cost": {
+        "support": "unsupported",
+        "detail": {
+          "kind": {
+            "kind": "no_such_data"
+          },
+          "reason": "No supported local usage record is available.",
+          "would_change": "The agent provides a documented local usage record."
+        }
+      },
+      "five_hour": {
+        "support": "unsupported",
+        "detail": {
+          "kind": {
+            "kind": "no_such_data"
+          },
+          "reason": "The agent has no independent subscription window.",
+          "would_change": "The agent exposes its own subscription limits."
+        }
+      },
+      "models": {
+        "support": "unsupported",
+        "detail": {
+          "kind": {
+            "kind": "no_such_data"
+          },
+          "reason": "No supported local usage record is available.",
+          "would_change": "The agent provides a documented local usage record."
+        }
+      },
+      "monthly": {
+        "support": "unsupported",
+        "detail": {
+          "kind": {
+            "kind": "no_such_data"
+          },
+          "reason": "The agent has no independent subscription window.",
+          "would_change": "The agent exposes its own subscription limits."
+        }
+      },
+      "project": {
+        "support": "unsupported",
+        "detail": {
+          "kind": {
+            "kind": "no_such_data"
+          },
+          "reason": "No supported local usage record is available.",
+          "would_change": "The agent provides a documented local usage record."
+        }
+      },
+      "scoped": {
+        "support": "unsupported",
+        "detail": {
+          "kind": {
+            "kind": "no_such_data"
+          },
+          "reason": "The agent has no independent subscription window.",
+          "would_change": "The agent exposes its own subscription limits."
+        }
+      },
+      "session": {
+        "support": "unsupported",
+        "detail": {
+          "kind": {
+            "kind": "no_such_data"
+          },
+          "reason": "No supported local usage record is available.",
+          "would_change": "The agent provides a documented local usage record."
+        }
+      },
+      "tokens": {
+        "support": "unsupported",
+        "detail": {
+          "kind": {
+            "kind": "no_such_data"
+          },
+          "reason": "No supported local usage record is available.",
+          "would_change": "The agent provides a documented local usage record."
+        }
+      },
+      "weekly": {
+        "support": "unsupported",
+        "detail": {
+          "kind": {
+            "kind": "no_such_data"
+          },
+          "reason": "The agent has no independent subscription window.",
+          "would_change": "The agent exposes its own subscription limits."
+        }
+      }
+    }
+  },
+  {
+    "agent": "jeo",
+    "cells": {
+      "cost": {
+        "support": "unsupported",
+        "detail": {
+          "kind": {
+            "kind": "no_such_data"
+          },
+          "reason": "No supported local usage record is available.",
+          "would_change": "The agent provides a documented local usage record."
+        }
+      },
+      "five_hour": {
+        "support": "unsupported",
+        "detail": {
+          "kind": {
+            "kind": "no_such_data"
+          },
+          "reason": "The agent has no independent subscription window.",
+          "would_change": "The agent exposes its own subscription limits."
+        }
+      },
+      "models": {
+        "support": "unsupported",
+        "detail": {
+          "kind": {
+            "kind": "no_such_data"
+          },
+          "reason": "No supported local usage record is available.",
+          "would_change": "The agent provides a documented local usage record."
+        }
+      },
+      "monthly": {
+        "support": "unsupported",
+        "detail": {
+          "kind": {
+            "kind": "no_such_data"
+          },
+          "reason": "The agent has no independent subscription window.",
+          "would_change": "The agent exposes its own subscription limits."
+        }
+      },
+      "project": {
+        "support": "unsupported",
+        "detail": {
+          "kind": {
+            "kind": "no_such_data"
+          },
+          "reason": "No supported local usage record is available.",
+          "would_change": "The agent provides a documented local usage record."
+        }
+      },
+      "scoped": {
+        "support": "unsupported",
+        "detail": {
+          "kind": {
+            "kind": "no_such_data"
+          },
+          "reason": "The agent has no independent subscription window.",
+          "would_change": "The agent exposes its own subscription limits."
+        }
+      },
+      "session": {
+        "support": "unsupported",
+        "detail": {
+          "kind": {
+            "kind": "no_such_data"
+          },
+          "reason": "No supported local usage record is available.",
+          "would_change": "The agent provides a documented local usage record."
+        }
+      },
+      "tokens": {
+        "support": "unsupported",
+        "detail": {
+          "kind": {
+            "kind": "no_such_data"
+          },
+          "reason": "No supported local usage record is available.",
+          "would_change": "The agent provides a documented local usage record."
+        }
+      },
+      "weekly": {
+        "support": "unsupported",
+        "detail": {
+          "kind": {
+            "kind": "no_such_data"
+          },
+          "reason": "The agent has no independent subscription window.",
+          "would_change": "The agent exposes its own subscription limits."
+        }
+      }
+    }
   }
 ]

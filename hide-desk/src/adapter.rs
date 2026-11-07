@@ -117,6 +117,7 @@ impl AdapterId {
     pub const OMP: Self = Self(AgentId::Omp);
     pub const ANTIGRAVITY: Self = Self(AgentId::Antigravity);
     pub const GROK: Self = Self(AgentId::Grok);
+    pub const JEOPI: Self = Self(AgentId::Jeopi);
 
     /// Every agent of the catalog Desk speaks ACP with, in the catalog's
     /// order.
@@ -173,8 +174,10 @@ impl AdapterId {
             AgentId::ClaudeCode => Some(AskMode::SetMode("default")),
             AgentId::Codex => Some(AskMode::SetMode("read-only")),
             AgentId::Pi => Some(AskMode::PiExtension),
-            AgentId::OpenCode | AgentId::Omp | AgentId::Antigravity => Some(AskMode::AtStart),
-            AgentId::Grok | AgentId::Cursor => None,
+            AgentId::OpenCode | AgentId::Omp | AgentId::Antigravity | AgentId::Jeopi => {
+                Some(AskMode::AtStart)
+            }
+            AgentId::Grok | AgentId::Jeo | AgentId::Cursor => None,
         }
     }
 
@@ -186,10 +189,16 @@ impl AdapterId {
     /// no ask mode never starts, so it has none.
     pub fn always_runs(self) -> &'static [Row] {
         match self.0 {
-            AgentId::Codex | AgentId::OpenCode | AgentId::Omp | AgentId::Antigravity => {
+            AgentId::Codex
+            | AgentId::OpenCode
+            | AgentId::Omp
+            | AgentId::Antigravity
+            | AgentId::Jeopi => {
                 &[Row::Read]
             }
-            AgentId::ClaudeCode | AgentId::Pi | AgentId::Grok | AgentId::Cursor => &[],
+            AgentId::ClaudeCode | AgentId::Pi | AgentId::Grok | AgentId::Jeo | AgentId::Cursor => {
+                &[]
+            }
         }
     }
 
@@ -217,6 +226,8 @@ impl AdapterId {
             AgentId::Antigravity => "agy",
             AgentId::Grok => "grok login",
             AgentId::Cursor => "cursor-agent login",
+            AgentId::Jeopi => "jeopi",
+            AgentId::Jeo => "jeo auth login",
         }
     }
 
@@ -278,6 +289,16 @@ fn route(key: AgentId) -> Option<Route> {
         ]),
         AgentId::Antigravity => Route::Native(&["acp"]),
         AgentId::Grok => Route::Native(&["agent", "--no-leader", "stdio"]),
+        AgentId::Jeopi => Route::Native(&[
+            "--mode",
+            "acp",
+            "--approval-mode",
+            "always-ask",
+            "--no-extensions",
+            "--no-skills",
+            "--no-rules",
+        ]),
+        AgentId::Jeo => return None,
         // Retired: Hide starts no Cursor.
         AgentId::Cursor => return None,
     })
@@ -481,7 +502,9 @@ mod tests {
         let names: Vec<&str> = AdapterId::all().map(AdapterId::as_str).collect();
         assert_eq!(
             names,
-            ["claude", "codex", "grok", "opencode", "pi", "omp", "agy"]
+            [
+                "claude", "codex", "grok", "opencode", "pi", "omp", "agy", "jeopi",
+            ]
         );
         for adapter in AdapterId::all() {
             assert_eq!(AdapterId::parse(adapter.as_str()), Some(adapter));

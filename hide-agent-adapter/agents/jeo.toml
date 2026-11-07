@@ -1,0 +1,44 @@
+schema = 1
+id = "jeo"
+name = "jeo"
+executables = ["jeo"]
+packages = ["jeo-code"]
+home = "~/.jeo"
+hooks = "none"
+
+[resume]
+session = ["--resume", "{session}"]
+last = ["--resume"]
+
+[screen]
+version = "2026.11.07.1"
+min_engine_version = 1
+updated_at = "2026-11-07T00:00:00Z"
+
+[[screen.rules]]
+id = "jeo_title_working"
+state = "working"
+priority = 1100
+region = "osc_title"
+visible_working = true
+contains = ["jeo: "]
+
+[[screen.rules]]
+id = "jeo_working_spinner"
+state = "working"
+priority = 100
+region = "bottom_non_empty_lines(12)"
+visible_working = true
+any = [
+  { line_regex = ['[⠋⠙⠹⠸⠼⠴⠦⠧⠇⠏]'] }
+]
+
+[[screen.rules]]
+id = "jeo_ready_prompt"
+state = "idle"
+priority = 50
+region = "bottom_non_empty_lines(6)"
+any = [
+  { line_regex = ['^\s*>\s*'] },
+  { contains = ["Ready for your next prompt"] }
+]
