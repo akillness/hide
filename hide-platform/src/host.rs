@@ -411,6 +411,7 @@ pub(crate) fn is_program(candidate: &Path) -> bool {
 /// Linux, `%ComSpec%` (cmd.exe) on Windows.
 pub fn default_shell() -> io::Result<PathBuf> {
     absolute_variable(&process, if cfg!(windows) { "ComSpec" } else { "SHELL" })
+        .or_else(|_| crate::user_agents::account_shell().map(PathBuf::from).ok_or_else(|| io::Error::new(io::ErrorKind::NotFound, "no default shell found")))
 }
 
 /// Moves the file or folder at `path` to the system's Trash (the Recycle

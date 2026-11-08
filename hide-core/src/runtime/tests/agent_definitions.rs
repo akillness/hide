@@ -8,7 +8,7 @@ use super::*;
 use hide_agent_adapter::definition::{Catalog, UserFile, builtins};
 use serde_json::Value;
 
-const SEVEN: [&str; 7] = [
+const BUILTINS: [&str; 9] = [
     "claude-code",
     "codex",
     "grok",
@@ -16,6 +16,8 @@ const SEVEN: [&str; 7] = [
     "pi",
     "omp",
     "antigravity",
+    "jeopi",
+    "jeo",
 ];
 /// The fields every catalog row carried before definitions existed.
 const ROW_FIELDS: [&str; 14] = [
@@ -58,7 +60,7 @@ fn with_the_switch_off_the_catalog_and_spawn_keep_the_seven_agents_and_nothing_i
     let mut runtime = runtime();
     let node = crate::node::TEST_NODE;
     let catalog = runtime.agent_catalog(node, None, true).unwrap();
-    assert_eq!(ids(&catalog), SEVEN);
+    assert_eq!(ids(&catalog), BUILTINS);
     for item in catalog["items"].as_array().unwrap() {
         let mut fields: Vec<&str> = item
             .as_object()
@@ -81,13 +83,13 @@ fn with_the_switch_off_the_catalog_and_spawn_keep_the_seven_agents_and_nothing_i
         ["installed_known", "items", "machine", "models_read_pending"]
     );
     // A spawn starts the same kinds; a definition-only agent is not one.
-    for id in SEVEN {
+    for id in BUILTINS {
         assert!(hide_agent_adapter::start_kind(id).is_some(), "{id}");
     }
     for id in builtins().iter().map(|definition| definition.id.as_str()) {
         assert_eq!(
             hide_agent_adapter::start_kind(id).is_some(),
-            SEVEN.contains(&id),
+            BUILTINS.contains(&id),
             "{id}"
         );
     }
@@ -121,9 +123,9 @@ fn with_the_switch_on_the_catalog_lists_every_definition_its_source_and_rules_an
     let listed = ids(&catalog);
     assert_eq!(listed.len(), builtins().len() + 1);
     assert_eq!(
-        &listed[..7],
-        SEVEN,
-        "the seven keep their order and come first"
+        &listed[..9],
+        BUILTINS,
+        "the builtins keep their order and come first"
     );
     assert!(listed.contains(&"gemini".to_owned()) && listed.contains(&"mypi".to_owned()));
 

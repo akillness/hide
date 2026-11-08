@@ -98,7 +98,10 @@ impl UserShell {
     /// the engine gives a pane.
     pub fn of_process() -> Self {
         Self {
-            shell: std::env::var("SHELL").ok(),
+            shell: std::env::var("SHELL")
+                .ok()
+                .filter(|s| !s.trim().is_empty())
+                .or_else(hide_platform::user_agents::account_shell),
             zdotdir: std::env::var("ZDOTDIR").ok(),
         }
     }

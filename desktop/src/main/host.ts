@@ -966,7 +966,7 @@ export class DesktopHost {
     // Windows names variables without regard to case, so the inherited `Path`
     // goes and this PATH is the child's only one.
     const passed = Object.entries(this.env.inherited).filter(([key]) => process.platform !== "win32" || key.toUpperCase() !== "PATH");
-    return { ...Object.fromEntries(passed), PATH: searchPath };
+    return { ...Object.fromEntries(passed), ...(this.env.shell ? { SHELL: this.env.shell } : {}), PATH: searchPath };
   }
 
   private runChild(file: string, args: readonly string[], timeoutMs: number, env: Record<string, string | undefined>): Promise<ChildResult> {

@@ -530,7 +530,7 @@ mod tests {
     #[test]
     fn registry_has_all_agents_but_only_three_distinct_limit_reads() {
         let rows = AgentUsage::initial_rows();
-        assert_eq!(rows.len(), 7);
+        assert_eq!(rows.len(), 9);
         assert_eq!(
             rows.iter()
                 .filter(|r| matches!(r.limits, Cell::Loading))
@@ -538,7 +538,7 @@ mod tests {
             3
         );
         assert!(rows.iter().all(|row| row.agent != "cursor"));
-        for row in &rows {
+        for row in rows.iter().filter(|r| r.agent != "jeopi" && r.agent != "jeo") {
             assert!(matches!(row.consumption, Cell::Loading), "{}", row.agent);
         }
         assert_eq!(

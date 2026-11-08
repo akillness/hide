@@ -254,3 +254,61 @@ pub fn account_home() -> io::Result<PathBuf> {
     #[cfg(windows)]
     crate::host::home_dir()
 }
+
+/// The account's default shell from the user database, or fallback for the platform.
+pub fn account_shell() -> Option<String> {
+    #[cfg(unix)]
+    {
+        use std::ffi::CStr;
+        let mut record = std::mem::MaybeUninit::<libc::passwd>::uninit();
+        let mut result = std::ptr::null_mut();
+        let mut bytes = vec![0_u8; 64 * 1024];
+        let code = unsafe {
+            libc::getpwuid_r(
+                libc::getuid(),
+                record.as_mut_ptr(),
+                bytes.as_mut_ptr().cast(),
+                bytes.len(),
+                &mut result,
+            )
+        };
+        if code == 0 && !result.is_null() {
+            let record = unsafe { record.assume_init() };
+            if !record.pw_shell.is_null() {
+                let shell = unsafe { CStr::from_ptr(record.pw_shell) };
+                if let Ok(s) = shell.to_str() {
+                    let s = s.trim();
+                    if !s.is_empty() && std::path::Path::new(s).is_file() {
+                        return Some(s.to_owned());
+                    }
+                }
+            }
+        }
+        #[cfg(target_os = "macos")]
+        {
+            if std::path::Path::new("/bin/zsh").is_file() {
+                return Some("/bin/zsh".to_owned());
+            }
+            if std::path::Path::new("/bin/bash").is_file() {
+                return Some("/bin/bash".to_owned());
+            }
+            if std::path::Path::new("/bin/sh").is_file() {
+                return Some("/bin/sh".to_owned());
+            }
+        }
+        #[cfg(not(target_os = "macos"))]
+        {
+            if std::path::Path::new("/bin/bash").is_file() {
+                return Some("/bin/bash".to_owned());
+            }
+            if std::path::Path::new("/bin/sh").is_file() {
+                return Some("/bin/sh".to_owned());
+            }
+        }
+        None
+    }
+    #[cfg(windows)]
+    {
+        std::env::var("COMSPEC").ok().or_else(|| Some("powershell.exe".to_owned()))
+    }
+}

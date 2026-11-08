@@ -1052,6 +1052,7 @@ mod tests {
                 ("pi", Look::Install),
                 ("omp", Look::State(DeskAgentState::Ready, None)),
                 ("agy", Look::State(DeskAgentState::Ready, None)),
+                ("jeopi", Look::State(DeskAgentState::Ready, None)),
             ]
         );
         // An installed adapter is ready without the network.
